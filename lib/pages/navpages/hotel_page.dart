@@ -7,6 +7,7 @@ import 'package:apptest/widgets/custon_card_listtile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 class HotelPage extends StatefulWidget {
   const HotelPage({Key? key});
@@ -16,16 +17,24 @@ class HotelPage extends StatefulWidget {
 }
 
 class _HotelPageState extends State<HotelPage> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-
   RxInt roomCount = 1.obs;
   RxInt adultCount = 2.obs;
   RxInt childrenCount = 0.obs;
   RxString selectedLocation = ''.obs;
   RxString city = ''.obs;
   RxString country = ''.obs;
+  final _calendarFormat = CalendarFormat.month.obs;
+  final _focusedDay = DateTime.now().obs;
+  final _selectedDay = Rx<DateTime?>(null);
+  final _rangeStart = Rx<DateTime?>(null);
+  final _rangeEnd = Rx<DateTime?>(null);
+  void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
+    _selectedDay.value = null;
+    _focusedDay.value = focusedDay;
+    _rangeStart.value = start;
+    _rangeEnd.value = end;
+  }
+
   void _updateRoomCount(bool increment) {
     if (increment) {
       roomCount++;
@@ -182,10 +191,34 @@ class _HotelPageState extends State<HotelPage> {
                               onTap: () {
                                 bottomSheetDate(context);
                               },
-                              child: CustomCardListTitle(
-                                title: 'Ngày Nhận/Trả Phòng',
-                                subtitle: 'Chọn ngày',
-                              ),
+                              child: Obx(() {
+                                String subtitleText = 'Chọn ngày';
+                                int numberOfDays = 0;
+                                if (_rangeStart.value != null &&
+                                    _rangeEnd.value != null) {
+                                  final startFormatted = DateFormat('dd/MM')
+                                      .format(_rangeStart.value!.toLocal());
+                                  final endFormatted = DateFormat('dd/MM')
+                                      .format(_rangeEnd.value!.toLocal());
+                                  subtitleText =
+                                      '$startFormatted - $endFormatted';
+                                  numberOfDays = _rangeEnd.value!
+                                      .difference(_rangeStart.value!)
+                                      .inDays;
+                                }
+                                if (numberOfDays > 0) {
+                                  subtitleText += ' | Số ngày: $numberOfDays';
+                                }
+
+                                return Column(
+                                  children: [
+                                    CustomCardListTitle(
+                                      title: 'Ngày Nhận/Trả Phòng',
+                                      subtitle: subtitleText,
+                                    ),
+                                  ],
+                                );
+                              }),
                             ),
                             InkWell(
                               onTap: () {
@@ -353,22 +386,31 @@ class _HotelPageState extends State<HotelPage> {
                   ),
                 ),
                 const Divider(),
-                TableCalendar(
-                  firstDay: DateTime.utc(2024, 1, 1),
-                  lastDay: DateTime.utc(2024, 12, 31),
-                  focusedDay: _focusedDay,
-                  calendarFormat: _calendarFormat,
-                  onFormatChanged: (format) {
-                    setState(() {
-                      _calendarFormat = format;
-                    });
-                  },
-                  onDaySelected: (selectedDay, focusedDay) {
-                    setState(() {
-                      _selectedDay = selectedDay;
-                    });
-                  },
-                ),
+                Obx(() {
+                  return TableCalendar(
+                    calendarFormat: _calendarFormat.value,
+                    headerVisible: false,
+                    focusedDay: _focusedDay.value,
+                    firstDay: DateTime.utc(2024, 1, 1),
+                    lastDay: DateTime.utc(2024, 12, 31),
+                    rangeStartDay: _rangeStart.value,
+                    rangeEndDay: _rangeEnd.value,
+                    calendarStyle: const CalendarStyle(
+                      outsideDaysVisible: false,
+                    ),
+                    rangeSelectionMode: RangeSelectionMode.toggledOn,
+                    onRangeSelected: _onRangeSelected,
+                    onFormatChanged: (format) {
+                      if (_calendarFormat.value != format) {
+                        _calendarFormat.value = format;
+                      }
+                    },
+                    onPageChanged: (focusedDay) {
+                      _focusedDay.value = focusedDay;
+                    },
+                    rowHeight: 50,
+                  );
+                }),
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.only(bottom: 20),
