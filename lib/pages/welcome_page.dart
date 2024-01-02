@@ -38,14 +38,14 @@ class _WelcomePageState extends State<WelcomePage> {
                         children: [
                           AppLargeText(size: 50, text: texts[index]),
                           AppText(size: 45, text: "đến với klook"),
-                          SizedBox(
+                          const SizedBox(
                             height: 40,
                           ),
                           ReponsiveButton(
                             width: 100,
                             onPressed: () {
                               // Thực hiện điều hướng đến HomePage khi nhấn vào button
-                              Navigator.pushReplacementNamed(context, '/home');
+                              Navigator.pushNamed(context, '/home');
                             },
                           )
                         ],

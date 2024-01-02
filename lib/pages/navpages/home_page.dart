@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
               width: 100,
               onPressed: () {
                 // Thực hiện điều hướng đến HomePage khi nhấn vào button
-                Navigator.pushReplacementNamed(context, '/hotel');
+                Navigator.pushNamed(context, '/hotel');
               },
             )
           ],

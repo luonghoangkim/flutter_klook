@@ -1,7 +1,8 @@
-import 'package:apptest/pages/navpages/home_page.dart';
-import 'package:apptest/pages/navpages/hotel_page.dart';
 import 'package:apptest/pages/welcome_page.dart';
+import 'package:apptest/router_app.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,11 +14,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/home': (context) => HomePage(),
-        '/hotel': (context) => HotelPage(),
-      },
+    return GetMaterialApp(
+      getPages: AppRouter.routes,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
