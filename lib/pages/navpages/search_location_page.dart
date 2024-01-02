@@ -133,7 +133,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text('Khám phá những địa điểm gần đây')
+                            Expanded(child: Text('Khám phá những địa điểm gần đây'))
                           ]),
                         ),
                       ),

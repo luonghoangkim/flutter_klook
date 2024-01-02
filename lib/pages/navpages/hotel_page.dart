@@ -20,7 +20,6 @@ class _HotelPageState extends State<HotelPage> {
   RxInt roomCount = 1.obs;
   RxInt adultCount = 2.obs;
   RxInt childrenCount = 0.obs;
-  RxString selectedLocation = ''.obs;
   RxString city = ''.obs;
   RxString country = ''.obs;
   final _calendarFormat = CalendarFormat.month.obs;
@@ -28,6 +27,17 @@ class _HotelPageState extends State<HotelPage> {
   final _selectedDay = Rx<DateTime?>(null);
   final _rangeStart = Rx<DateTime?>(null);
   final _rangeEnd = Rx<DateTime?>(null);
+
+  void printAllValues() {
+    print('roomCount: ${roomCount.value}');
+    print('adultCount: ${adultCount.value}');
+    print('childrenCount: ${childrenCount.value}');
+    print('city: ${city.value}');
+    print('country: ${country.value}');
+    print('rangeStart: ${_rangeStart.value}');
+    print('rangeEnd: ${_rangeEnd.value}');
+  }
+
   void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
     _selectedDay.value = null;
     _focusedDay.value = focusedDay;
@@ -47,20 +57,20 @@ class _HotelPageState extends State<HotelPage> {
 
   void _updateAdultCount(bool increment) {
     if (increment) {
-      adultCount++;
+      adultCount.value++;
     } else {
-      if (roomCount > 1) {
-        adultCount--;
+      if (adultCount.value > 0) {
+        adultCount.value--;
       }
     }
   }
 
   void _updateChildrenCount(bool increment) {
     if (increment) {
-      childrenCount++;
+      childrenCount.value++;
     } else {
-      if (roomCount > 1) {
-        childrenCount--;
+      if (childrenCount.value > 0) {
+        childrenCount.value--;
       }
     }
   }
@@ -83,7 +93,6 @@ class _HotelPageState extends State<HotelPage> {
         },
       ),
     );
-    print(result);
     if (result != null && result is Map<String, String>) {
       setState(() {
         city.value = result['name']!;
@@ -175,15 +184,17 @@ class _HotelPageState extends State<HotelPage> {
                                           fontSize: 12,
                                           color: AppColors.textTitleColor),
                                     ),
-                                    subtitle: Text(
-                                      selectedLocation.isNotEmpty
-                                          ? '${city} , ${country}'
-                                          : 'Thành phố HCM, Việt Nam',
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
+                                    subtitle: Obx(() {
+                                      return Text(
+                                        city.isNotEmpty && country.isNotEmpty
+                                            ? '$city, $country'
+                                            : 'Thành phố HCM, Việt Nam',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      );
+                                    }),
                                     trailing: const Icon(Icons.my_location),
                                   ),
                                 )),
@@ -207,7 +218,7 @@ class _HotelPageState extends State<HotelPage> {
                                       .inDays;
                                 }
                                 if (numberOfDays > 0) {
-                                  subtitleText += ' | Số ngày: $numberOfDays';
+                                  subtitleText += ' | $numberOfDays đêm';
                                 }
 
                                 return Column(
@@ -234,7 +245,9 @@ class _HotelPageState extends State<HotelPage> {
                             ),
                             CustomButton(
                               buttonText: 'Tìm kiếm',
-                              onPressed: () {},
+                              onPressed: () {
+                                printAllValues();
+                              },
                             )
                           ],
                         ),
@@ -311,7 +324,7 @@ class _HotelPageState extends State<HotelPage> {
                       ),
                       Obx(
                         () => Text('$adultCount',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w400)),
                       ),
                       PlusMinusIconButton(
