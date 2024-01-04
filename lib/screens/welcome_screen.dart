@@ -2,15 +2,16 @@ import 'package:apptest/widgets/app_large_text.dart';
 import 'package:apptest/widgets/app_text.dart';
 import 'package:apptest/widgets/button_rep%C3%B3nive.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
 
   @override
-  State<WelcomePage> createState() => _WelcomePageState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomePageState extends State<WelcomePage> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   List images = ['bannerQTmb.png', 'bannerQTmb.png', 'bannerQTmb.png'];
   List texts = ['Chào mừng', 'Welcome', 'Ni Hao'];
   @override
@@ -45,7 +46,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             width: 100,
                             onPressed: () {
                               // Thực hiện điều hướng đến HomePage khi nhấn vào button
-                              Navigator.pushNamed(context, '/home');
+                              Get.toNamed('/home');
                             },
                           )
                         ],

@@ -1,15 +1,16 @@
 import 'package:apptest/widgets/button_rep%C3%B3nive.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart'; 
 import 'package:table_calendar/table_calendar.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -28,17 +29,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trang chủ'),
+        title: const Text('Trang chủ'),
       ),
       body: Container(
         child: Column(
           children: [
-            Text('Ấn Button để vào khách sạn'),
+            const Text('Ấn Button để vào khách sạn'),
             ReponsiveButton(
               width: 100,
               onPressed: () {
-                // Thực hiện điều hướng đến HomePage khi nhấn vào button
-                Navigator.pushNamed(context, '/hotel');
+                Get.toNamed('/hotel');
               },
             ),
             TableCalendar(
@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage> {
               },
               rowHeight: 50,
             ),
+          
           ],
         ),
       ),

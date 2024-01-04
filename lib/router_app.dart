@@ -1,11 +1,15 @@
 // router_app.dart
+import 'package:apptest/screens/nav_screens/search_hotel_screen.dart';
+import 'package:apptest/screens/nav_screens/testpage.dart';
 import 'package:get/get.dart';
-import 'package:apptest/pages/navpages/home_page.dart';
-import 'package:apptest/pages/navpages/hotel_page.dart';
+import 'package:apptest/screens/nav_screens/home_screen.dart';
+import 'package:apptest/screens/nav_screens/hotel_screen.dart';
 
 class AppRouter {
   static List<GetPage> routes = [
-    GetPage(name: '/home', page: () => HomePage()),
-    GetPage(name: '/hotel', page: () => HotelPage()),
+    GetPage(name: '/home', page: () => HomeScreen()),
+    GetPage(name: '/hotel', page: () => HotelScreen()),
+    GetPage(name: '/search_hotel', page: () => SearchHotelScreen()),
+    GetPage(name: '/topsheet', page: () => YourWidget()),
   ];
 }

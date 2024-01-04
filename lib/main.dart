@@ -1,4 +1,4 @@
-import 'package:apptest/pages/welcome_page.dart';
+import 'package:apptest/screens/welcome_screen.dart';
 import 'package:apptest/router_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,6 +39,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return WelcomePage();
+    return WelcomeScreen();
   }
 }

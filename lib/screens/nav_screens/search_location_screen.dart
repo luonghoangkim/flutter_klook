@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 const Duration fakeAPIDuration = Duration(seconds: 1);
 
-class SearchLocationPage extends StatefulWidget {
+class SearchLocationScreen extends StatefulWidget {
   @override
-  _SearchLocationPageState createState() => _SearchLocationPageState();
+  _SearchLocationScreenState createState() => _SearchLocationScreenState();
 }
 
-class _SearchLocationPageState extends State<SearchLocationPage> {
+class _SearchLocationScreenState extends State<SearchLocationScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, String>> _foundUsers = [];
 
