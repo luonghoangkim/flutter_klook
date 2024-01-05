@@ -1,4 +1,5 @@
 // router_app.dart
+import 'package:apptest/screens/nav_screens/detail_hotel.dart';
 import 'package:apptest/screens/nav_screens/search_hotel_screen.dart';
 import 'package:apptest/screens/nav_screens/testpage.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ class AppRouter {
     GetPage(name: '/home', page: () => HomeScreen()),
     GetPage(name: '/hotel', page: () => HotelScreen()),
     GetPage(name: '/search_hotel', page: () => SearchHotelScreen()),
-    GetPage(name: '/topsheet', page: () => YourWidget()),
+    GetPage(name: '/detail', page: () => DetailScreen()),
+    GetPage(name: '/detail_hotel', page: () => DetailHotelScreen()),
   ];
 }

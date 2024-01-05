@@ -124,7 +124,7 @@ class DataHotel {
               'img/img_hotel4.jpeg',
               'img/img_hotel5.jpeg'
             ],
-            'hotelName': 'Khách sạn X',
+            'hotelName': 'Khách sạn Hồng Công',
             'rating': 4.8,
             'distance': 1.5,
             'amenities': ['Spa cao cấp', 'Nhà hàng 5 sao', 'Bãi biển riêng'],
@@ -140,7 +140,7 @@ class DataHotel {
               'img/img_hotel4.jpeg',
               'img/img_hotel5.jpeg'
             ],
-            'hotelName': 'Khách sạn Y',
+            'hotelName': 'Khách sạn HongCong2',
             'rating': 4.4,
             'distance': 3.0,
             'amenities': [
@@ -160,7 +160,7 @@ class DataHotel {
               'img/img_hotel4.jpeg',
               'img/img_hotel5.jpeg'
             ],
-            'hotelName': 'Khách sạn Z',
+            'hotelName': 'Khách sạn Hoa Trung',
             'rating': 4.2,
             'distance': 2.5,
             'amenities': [

@@ -41,6 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 Get.toNamed('/hotel');
               },
             ),
+            ReponsiveButton(
+              width: 100,
+              onPressed: () {
+                Get.toNamed('/detail');
+              },
+            ),
             TableCalendar(
               calendarFormat: _calendarFormat,
               headerVisible: false,

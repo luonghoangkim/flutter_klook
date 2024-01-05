@@ -1,6 +1,6 @@
 import 'package:apptest/screens/nav_screens/hotel_infor.dart';
 import 'package:apptest/screens/nav_screens/search_location_screen.dart';
-import 'package:apptest/widgets/bottom_sheet_hotel.dart'; 
+import 'package:apptest/widgets/bottom_sheet_hotel.dart';
 import 'package:apptest/widgets/app_color.dart';
 import 'package:apptest/widgets/custom_button.dart';
 import 'package:apptest/widgets/custon_card_listtile.dart';
@@ -97,6 +97,7 @@ class _HotelScreenState extends State<HotelScreen> {
         },
       ),
     );
+   
     if (result != null && result is Map<String, String>) {
       setState(() {
         city.value = result['name']!;
@@ -120,16 +121,19 @@ class _HotelScreenState extends State<HotelScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor:
             _scrollPosition > 50 ? Colors.white : Colors.transparent,
-        title: _scrollPosition > 50 ? const Text('Khách sạn') : null,
+        title: _scrollPosition > 50
+            ? const Center(child: Text('Khách sạn'))
+            : null,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.navigate_before,size: 35,
+          icon: Icon(Icons.navigate_before,
+              size: 35,
               color: _scrollPosition > 50 ? Colors.black : Colors.white),
           onPressed: () {
             Navigator.pop(context);
@@ -147,16 +151,26 @@ class _HotelScreenState extends State<HotelScreen> {
         controller: _scrollController,
         child: Stack(
           children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
+            Container(
+              height: 250,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("img/banner_hotel.jpeg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
               child: Container(
-                height: 250,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("img/banner_hotel.jpeg"),
-                    fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Colors.white
+                          .withOpacity(0.8),  
+                      Colors.transparent,
+                    ],
                   ),
                 ),
               ),
@@ -164,7 +178,7 @@ class _HotelScreenState extends State<HotelScreen> {
             SafeArea(
               child: Column(
                 children: [
-                  Container( 
+                  Container(
                     width: double.maxFinite,
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -244,7 +258,7 @@ class _HotelScreenState extends State<HotelScreen> {
                                   if (numberOfDays > 0) {
                                     subtitleText += ' | $numberOfDays đêm';
                                   }
-              
+
                                   return Column(
                                     children: [
                                       CustomCardListTitle(
@@ -299,13 +313,13 @@ class _HotelScreenState extends State<HotelScreen> {
       context: context,
       builder: (BuildContext context) {
         return RoomSelectionBottomSheet(
-        roomCount: roomCount,
-        adultCount: adultCount,
-        childrenCount: childrenCount,
-        updateRoomCount: _updateRoomCount,
-        updateAdultCount: _updateAdultCount,
-        updateChildrenCount: _updateChildrenCount,
-      );
+          roomCount: roomCount,
+          adultCount: adultCount,
+          childrenCount: childrenCount,
+          updateRoomCount: _updateRoomCount,
+          updateAdultCount: _updateAdultCount,
+          updateChildrenCount: _updateChildrenCount,
+        );
       },
     );
   }
@@ -316,20 +330,20 @@ class _HotelScreenState extends State<HotelScreen> {
       context: context,
       builder: (BuildContext context) {
         return CalendarWidget(
-        calendarFormat: _calendarFormat,
-        focusedDay: _focusedDay,
-        rangeStart: _rangeStart,
-        rangeEnd: _rangeEnd,
-        onRangeSelected: _onRangeSelected,
-        onFormatChanged: (format) {
-          if (_calendarFormat.value != format) {
-            _calendarFormat.value = format;
-          }
-        },
-        onPageChanged: (focusedDay) {
-          _focusedDay.value = focusedDay;
-        },
-      );
+          calendarFormat: _calendarFormat,
+          focusedDay: _focusedDay,
+          rangeStart: _rangeStart,
+          rangeEnd: _rangeEnd,
+          onRangeSelected: _onRangeSelected,
+          onFormatChanged: (format) {
+            if (_calendarFormat.value != format) {
+              _calendarFormat.value = format;
+            }
+          },
+          onPageChanged: (focusedDay) {
+            _focusedDay.value = focusedDay;
+          },
+        );
       },
     );
   }
