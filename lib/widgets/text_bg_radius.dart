@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomBarWidget extends StatelessWidget {
-  final String text;
-  final Color textColor;
-  final Color backgroundColor;
-  final double fontSize; // Thêm thuộc tính fontSize
+  final String? text;
+  final Color? textColor;
+  final Color? iconColor;
+  final Color? backgroundColor;
+  final double? fontSize;
+  final double? iconSize;
+  final IconData? iconData;
   final Function()? onTap;
 
   const CustomBarWidget({
@@ -12,8 +15,11 @@ class CustomBarWidget extends StatelessWidget {
     required this.text,
     required this.textColor,
     required this.backgroundColor,
-    required this.fontSize, // Thêm vào constructor
+    required this.fontSize,
+    this.iconData,
     this.onTap,
+    this.iconColor,
+    this.iconSize,
   }) : super(key: key);
 
   @override
@@ -28,12 +34,23 @@ class CustomBarWidget extends StatelessWidget {
         ),
         padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
         child: IntrinsicWidth(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: textColor,
-              fontSize: fontSize, // Sử dụng fontSize ở đây
-            ),
+          child: Row(
+            children: [
+              if (iconData != null)
+                Icon(
+                  iconData,
+                  color: iconColor,
+                  size: fontSize
+                ),
+              const SizedBox(width: 4),
+              Text(
+                text!,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: fontSize,
+                ),
+              ),
+            ],
           ),
         ),
       ),

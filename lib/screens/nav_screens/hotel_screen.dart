@@ -1,7 +1,7 @@
 import 'package:apptest/screens/nav_screens/hotel_infor.dart';
 import 'package:apptest/screens/nav_screens/search_location_screen.dart';
 import 'package:apptest/widgets/bottom_sheet_hotel.dart';
-import 'package:apptest/widgets/app_color.dart';
+import 'package:apptest/theme/app_color.dart';
 import 'package:apptest/widgets/custom_button.dart';
 import 'package:apptest/widgets/custon_card_listtile.dart';
 import 'package:flutter/material.dart';

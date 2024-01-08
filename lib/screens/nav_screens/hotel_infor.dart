@@ -1,5 +1,5 @@
 import 'package:apptest/model/hotel_model.dart';
-import 'package:apptest/widgets/app_color.dart';
+import 'package:apptest/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
 class HotelInfor extends StatelessWidget {

@@ -37,8 +37,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     children: [
                       Column(
                         children: [
-                          AppLargeText(size: 50, text: texts[index]),
-                          AppText(size: 45, text: "đến với klook"),
+                          Flexible(child: AppLargeText(size: 50, text: texts[index])),
+                          Flexible(child: AppText(size: 45, text: "đến với klook")),
                           const SizedBox(
                             height: 40,
                           ),
@@ -46,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             width: 100,
                             onPressed: () {
                               // Thực hiện điều hướng đến HomePage khi nhấn vào button
-                              Get.toNamed('/home');
+                              Get.offNamed('/home');
                             },
                           )
                         ],

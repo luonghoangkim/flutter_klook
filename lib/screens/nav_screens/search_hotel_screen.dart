@@ -1,6 +1,6 @@
 import 'package:apptest/model/hotel_model.dart';
 import 'package:apptest/screens/nav_screens/search_location_screen.dart';
-import 'package:apptest/widgets/app_color.dart';
+import 'package:apptest/theme/app_color.dart';
 import 'package:apptest/widgets/bottom_appbar_button.dart';
 import 'package:apptest/widgets/image_slider.dart';
 import 'package:apptest/widgets/start_rating.dart';

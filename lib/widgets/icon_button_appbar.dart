@@ -1,4 +1,4 @@
-import 'package:apptest/widgets/app_color.dart';
+import 'package:apptest/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
 class IconButtonWidget extends StatelessWidget {

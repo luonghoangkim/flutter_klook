@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: const ColorScheme.light(
+          primary: Colors.white,
+        ),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Trang chủ'),

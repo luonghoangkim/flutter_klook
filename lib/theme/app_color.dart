@@ -7,4 +7,6 @@ class AppColors {
   static const Color textTitleColor = Color(0xFF757575);
   static const Color matteBlack = Color.fromRGBO(0, 0, 0, 0.5);
   static const Color purpleCustoms = Color.fromARGB(255, 80, 85, 229);
+  static const Color whiteColor = Colors.white;  
 }
+
