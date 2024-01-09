@@ -1,3 +1,4 @@
+import 'package:apptest/theme/app_color.dart';
 import 'package:apptest/widgets/app_large_text.dart';
 import 'package:apptest/widgets/app_text.dart';
 import 'package:apptest/widgets/button_rep%C3%B3nive.dart';
@@ -12,7 +13,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  List images = ['bannerQTmb.png', 'bannerQTmb.png', 'bannerQTmb.png'];
+  List images = ['logo-klook.jpeg', 'bannerQTmb.png', 'bannerQTmb.png'];
   List texts = ['Chào mừng', 'Welcome', 'Ni Hao'];
   @override
   Widget build(BuildContext context) {
@@ -22,34 +23,44 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           itemCount: images.length,
           itemBuilder: (_, index) {
             return Container(
-              width: double.maxFinite,
-              height: double.maxFinite,
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(
-                        // ignore: prefer_interpolation_to_compose_strings
                         "img/" + images[index],
                       ),
-                      fit: BoxFit.cover)),
+                      fit: BoxFit.contain)),
               child: Container(
-                  margin: const EdgeInsets.only(top: 150, left: 20, right: 20),
+                  width: double.maxFinite,
+                  margin:
+                      const EdgeInsets.only(left: 20, right: 20, bottom: 250),
                   child: Row(
                     children: [
-                      Column(
-                        children: [
-                          Flexible(child: AppLargeText(size: 50, text: texts[index])),
-                          Flexible(child: AppText(size: 45, text: "đến với klook")),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          ReponsiveButton(
-                            width: 100,
-                            onPressed: () {
-                              // Thực hiện điều hướng đến HomePage khi nhấn vào button
-                              Get.offNamed('/home');
-                            },
-                          )
-                        ],
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            // Text(
+                            //   'Chào mừng đến với Klook',
+                            //   textAlign: TextAlign.center,
+                            //   style: TextStyle(
+                            //       color: AppColors.primaryColor,
+                            //       fontSize: 50,
+                            //       fontWeight: FontWeight.bold),
+                            // ),
+                            // const SizedBox(
+                            //   height: 40,
+                            // ),
+                            ReponsiveButton(
+                              width: 100,
+                              onPressed: () {
+                                // Thực hiện điều hướng đến HomePage khi nhấn vào button
+                                Get.offNamed('/home');
+                              },
+                            )
+                          ],
+                        ),
                       )
                     ],
                   )),

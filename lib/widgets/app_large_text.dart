@@ -8,14 +8,19 @@ class AppLargeText extends StatelessWidget {
       {super.key,
       required this.size,
       required this.text,
-      this.color = Colors.black});
+      this.color = Colors.white});
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style:
-          TextStyle(color: color, fontSize: size, fontWeight: FontWeight.bold),
+    return Flexible(
+      child: Text(
+        text,
+        style: TextStyle(
+            color: color,
+            overflow: TextOverflow.ellipsis,
+            fontSize: size,
+            fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

@@ -286,7 +286,7 @@ class _HotelScreenState extends State<HotelScreen> {
                                 onPressed: () {
                                   Map<String, dynamic> searchData =
                                       printAllValues();
-                                  print(searchData);
+                                  // print(searchData);
                                   Get.toNamed('/search_hotel',
                                       arguments: searchData);
                                 },

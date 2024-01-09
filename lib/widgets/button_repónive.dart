@@ -1,3 +1,4 @@
+import 'package:apptest/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ReponsiveButton extends StatelessWidget {
@@ -17,12 +18,12 @@ class ReponsiveButton extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.purple,
+          color: AppColors.primaryColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('img/button-one1.png'),
+           Icon(Icons.double_arrow, size: 55, color: AppColors.whiteColor)
           ],
         ),
       ),

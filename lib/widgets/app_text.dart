@@ -8,14 +8,14 @@ class AppText extends StatelessWidget {
       {super.key,
       required this.size,
       required this.text,
-      this.color = Colors.black});
+      this.color = Colors.white});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style:
-          TextStyle(color: color, fontSize: size, fontWeight: FontWeight.w500),
+          TextStyle(color: color, fontSize: size, overflow: TextOverflow.ellipsis ,fontWeight: FontWeight.w500),
     );
   }
 }

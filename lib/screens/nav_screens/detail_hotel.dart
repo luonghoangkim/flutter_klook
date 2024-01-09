@@ -28,7 +28,6 @@ class _DetailHotelScreenState extends State<DetailHotelScreen> {
 
   int _currentImageIndex = 0;
   final CarouselController _controller = CarouselController();
-
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -276,51 +275,82 @@ class _DetailHotelScreenState extends State<DetailHotelScreen> {
                                   fontSize: 14)),
                         )
                       ]),
-                      Container(
-                        margin: const EdgeInsets.only(top: 8, bottom: 8),
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.listTitleColor,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(16)),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.pool_sharp),
-                                  Flexible(
-                                    child: Text(
-                                      'Bể bơi (miễn phí) ',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(color: Colors.grey[800]),
-                                    ),
-                                  ),
-                                ],
+                      InkWell(
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 8, bottom: 8),
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.listTitleColor,
+                                width: 2,
                               ),
-                            ),
-                            Flexible(
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.directions_car_outlined),
-                                  Flexible(
-                                    child: Text(
-                                      'Đón và trả khách trạm tàu hoả, xe bus sân bay (có phụ phí)',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(color: Colors.grey[800]),
+                              borderRadius: BorderRadius.circular(16)),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.pool_sharp),
+                                    Flexible(
+                                      child: Text(
+                                        'Bể bơi (miễn phí) ',
+                                        overflow: TextOverflow.ellipsis,
+                                        style:
+                                            TextStyle(color: Colors.grey[800]),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            InkWell(
-                              child: const Icon(Icons.navigate_next),
-                              onTap: () {},
-                            ),
-                          ],
+                              Flexible(
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.directions_car_outlined),
+                                    Flexible(
+                                      child: Text(
+                                        'Đón và trả khách trạm tàu hoả, xe bus sân bay (có phụ phí)',
+                                        overflow: TextOverflow.ellipsis,
+                                        style:
+                                            TextStyle(color: Colors.grey[800]),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Icon(Icons.navigate_next)
+                            ],
+                          ),
                         ),
+                        onTap: () {
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return FractionallySizedBox(
+                                heightFactor: 0.9,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    ListTile(
+                                      leading: Icon(Icons.info),
+                                      title: Text('Thông tin 1'),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: Icon(Icons.info),
+                                      title: Text('Thông tin 2'),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -331,13 +361,11 @@ class _DetailHotelScreenState extends State<DetailHotelScreen> {
                           ),
                         ),
                         child: const ListTile(
-                          title: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              '23 Hưng Gia 3, P.Tân Phong , Q.7',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
+                          title: Text(
+                            '23 Hưng Gia 3, P.Tân Phong, Q.7',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
                           ),
                           subtitle: Row(
                             children: [
@@ -485,14 +513,15 @@ class _DetailHotelScreenState extends State<DetailHotelScreen> {
                       ListView.builder(
                         shrinkWrap: true,
                         padding: EdgeInsets.zero,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: 10,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: roomsData.length,
                         itemBuilder: (context, index) {
                           return ListHotelCard(
-                            title: 'Deluxe Double Room ${index + 1}',
-                            subTitle: '25.0 m2',
-                            price: '\$30',
-                            imagePath: 'img/img_hotel${index + 1}.jpeg', details: [],
+                            title: roomsData[index]['name'],
+                            subTitle: roomsData[index]['size'],
+                            price: roomsData[index]['price'],
+                            imagePath: 'img/img_hotel${index + 1}.jpeg',
+                            details: roomsData[index]['details'],
                           );
                         },
                       ),
@@ -1070,4 +1099,105 @@ final List<Map<String, dynamic>> dataCustomNearbyPlaceCard = [
     'ratingStatus': '3.9/5',
     'price': '\$75',
   },
+];
+final List<Map<String, dynamic>> roomsData = [
+  {
+    'name': 'Phòng Superior',
+    'size': '28 m²',
+    'price': '₫ 2,930,858',
+    'details': [
+      {
+        'bedType': '1 giường đôi lớn',
+        'amenities': [
+          {
+            'name': 'Đỗ xe miễn phí - for in-house guests',
+            'icon': Icons.check_circle_outline
+          },
+          {'name': 'Bữa sáng miễn phí', 'icon': Icons.coffee_outlined},
+          {'name': 'Không hoàn tiền', 'icon': Icons.remove_circle_outline},
+        ],
+        'price': '₫ 3,267,415',
+        'availability': '1',
+      },
+      {
+        'bedType': '1 giường đơn',
+        'amenities': [
+          {
+            'name': 'Đỗ xe miễn phí - for in-house guests',
+            'icon': Icons.check_circle_outline
+          },
+          {'name': 'Bữa sáng miễn phí', 'icon': Icons.coffee_outlined},
+          {'name': 'Không hoàn tiền', 'icon': Icons.remove_circle_outline},
+        ],
+        'price': '₫ 3,500,000',
+        'availability': '2',
+      },
+      {
+        'bedType': '2 giường đơn',
+        'amenities': [
+          {
+            'name': 'Đỗ xe miễn phí - for in-house guests',
+            'icon': Icons.check_circle_outline
+          },
+          {'name': 'Bữa sáng miễn phí', 'icon': Icons.coffee_outlined},
+          {'name': 'Không hoàn tiền', 'icon': Icons.remove_circle_outline},
+        ],
+        'price': '₫ 3,800,000',
+        'availability': '1',
+      },
+    ],
+  },
+  {
+    'name': 'Phòng Deluxe47',
+    'size': '30 m²',
+    'price': '₫ 3,267,415',
+    'details': [
+      {
+        'bedType': '1 giường đôi hoặc 2 giường đơn',
+        'amenities': [
+          {
+            'name': 'Đỗ xe miễn phí - for in-house guests',
+            'icon': Icons.check_circle_outline
+          },
+          {'name': 'Bữa sáng miễn phí', 'icon': Icons.coffee_outlined},
+          {'name': 'Không hoàn tiền', 'icon': Icons.remove_circle_outline},
+        ],
+        'price': '₫ 3,267,415',
+        'availability': '1',
+      },
+    ],
+  },
+  {
+    'name': 'Phòng Deluxe',
+    'size': '30 m²',
+    'price': '₫ 3,267,415',
+    'details': [
+      {
+        'bedType': '1 giường đôi hoặc 2 giường đơn',
+        'amenities': [
+          {
+            'name': 'Đỗ xe miễn phí - for in-house guests',
+            'icon': Icons.check_circle_outline
+          },
+          {'name': 'Bữa sáng miễn phí', 'icon': Icons.coffee_outlined},
+          {'name': 'Không hoàn tiền', 'icon': Icons.remove_circle_outline},
+        ],
+        'price': '₫ 3,167,415',
+        'availability': '1',
+      },
+      {
+        'bedType': '1 giường đơn',
+        'amenities': [
+          {
+            'name': 'Đỗ xe miễn phí - for in-house guests',
+            'icon': Icons.check_circle_outline
+          },
+          {'name': 'Bữa sáng miễn phí', 'icon': Icons.coffee_outlined},
+          {'name': 'Không hoàn tiền', 'icon': Icons.remove_circle_outline},
+        ],
+        'price': '₫ 3,500,000',
+        'availability': '2',
+      }
+    ],
+  }
 ];

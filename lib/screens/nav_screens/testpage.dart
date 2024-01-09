@@ -1,234 +1,158 @@
-import 'dart:math';
-
-import 'package:apptest/theme/app_color.dart';
-import 'package:apptest/widgets/text_bg_radius.dart';
+import 'package:apptest/controller/totoListController.dart';
+import 'package:apptest/model/todoModel.dart';
+import 'package:apptest/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
-class DetailScreen extends StatefulWidget {
-  const DetailScreen({Key? key});
+class DetailScreen extends StatelessWidget {
+  DetailScreen({super.key});
 
-  @override
-  State<DetailScreen> createState() => _DetailScreenState();
-}
+  final TodoController todoController = Get.put(TodoController());
 
-class _DetailScreenState extends State<DetailScreen> {
-  late CarouselController _controller;
-  int _currentImageIndex = 0;
-  ScrollController _scrollController = ScrollController();
-  bool isHeaderPinned = true;
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = CarouselController();
-    _scrollController.addListener(_onScroll);
+  Future<void> showTodoDialog(BuildContext context, {TodoModel? todo}) async {
+    titleController.text = todo?.title ?? '';
+    nameController.text = todo?.name ?? '';
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(todo == null ? 'Add Todo' : 'Update Todo'),
+          content: Column(
+            children: [
+              TextField(
+                controller: titleController,
+                decoration: InputDecoration(labelText: 'Title'),
+              ),
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Name'),
+              ),
+            ],
+          ),
+          actions: [
+            CustomButton(
+                buttonText: 'Thoát',
+                onPressed: () {
+                  Navigator.of(context).pop();
+                }),
+            CustomButton(
+                buttonText: todo == null ? 'Thêm' : 'Cập nhật',
+                onPressed: () {
+                  if (todo == null) {
+                    todoController.addTodo(TodoModel(
+                      title: titleController.text,
+                      name: nameController.text,
+                    ));
+                  } else {
+                    todoController.updateTodo(todo.copyWith(
+                      title: titleController.text,
+                      name: nameController.text,
+                    ));
+                  }
+                  Navigator.of(context).pop();
+                }),
+          ],
+        );
+      },
+    );
   }
 
-  void _onScroll() {
-    setState(() {
-      isHeaderPinned = _scrollController.position.pixels < 150;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final List<String> imageUrls = [
-      'img/img_hotel1.jpeg',
-      'img/img_hotel1.jpeg',
-      'img/img_hotel1.jpeg',
-    ];
-
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            elevation: 0,
-            pinned: true,
-            centerTitle: false,
-            stretch: true,
-            expandedHeight: 200.0,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(0),
-              child: Container(
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16))),
-              ),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              stretchModes: const [StretchMode.zoomBackground],
-              background: Image.asset(
-                'img/img_hotel1.jpeg',
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text('Item $index'),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-          SliverPersistentHeader(
-            pinned: true,
-            floating: false,
-            delegate: _SliverAppBarDelegate(
-              minHeight: 150.0,
-              maxHeight: 150.0,
-              child: Container(
-                color: Colors.white,
-                child: Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(14),
-                    width: double.maxFinite,
-                    child: Column(
-                      children: [
-                        const Row(
-                          children: [
-                            Flexible(
-                              flex: 3,
-                              child: Column(children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Thứ 4',
-                                    ),
-                                    Text(
-                                      'Thứ 5',
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '17/1',
-                                    ),
-                                    Text(
-                                      '-1 đêm-',
-                                    ),
-                                    Text(
-                                      '18/1',
-                                    ),
-                                  ],
-                                )
-                              ]),
-                            ),
-                          ],
-                        ),
-                        const Divider(
-                          thickness: 0.5,
-                        ),
-                        Wrap(
-                          children: [
-                            CustomBarWidget(
-                              iconData: Icons.local_fire_department,
-                              text: 'Giá tốt',
-                              iconColor: AppColors.primaryColor,
-                              textColor: AppColors.textTitleColor,
-                              backgroundColor: AppColors.listTitleColor,
-                              fontSize: 14,
-                              onTap: () {},
-                            ),
-                            CustomBarWidget(
-                              text: 'Bữa sáng miễn phí',
-                              textColor: AppColors.textTitleColor,
-                              backgroundColor: AppColors.listTitleColor,
-                              fontSize: 14,
-                              onTap: () {},
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text('Item $index'),
-                    );
-                  },
-                )
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text('Item $index'),
-                    );
-                  },
-                )
-              ],
-            ),
+      appBar: AppBar(
+        title: Text('Todo List'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+                onTap: () async {
+                  await showTodoDialog(context);
+                },
+                child: Icon(Icons.add)),
           )
         ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Obx(
+              () {
+                if (todoController.isLoading.value) {
+                  return ShimmerLoadingList();
+                } else {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: todoController.TodoList.length,
+                    itemBuilder: (context, index) {
+                      var todo = todoController.TodoList[index];
+                      return Container(
+                        margin: const EdgeInsets.all(10),
+                        color: Colors.grey[400],
+                        child: ListTile(
+                          title: Text(todo.title.toString()),
+                          subtitle: Text(todo.name.toString()),
+                          leading: InkWell(
+                            onTap: () async {
+                              await showTodoDialog(context, todo: todo);
+                            },
+                            child: const Icon(Icons.edit),
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              todoController.deleteTodo(todo);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-    required this.child,
-  });
-
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
+class ShimmerLoadingList extends StatelessWidget {
   @override
-  double get minExtent => minHeight;
-  @override
-  double get maxExtent => max(maxHeight, minHeight);
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox.expand(child: child);
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 15,
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: ListTile(
+            title: Container(
+              height: 20,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            subtitle: Container(
+              height: 16,
+              width: 80,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
