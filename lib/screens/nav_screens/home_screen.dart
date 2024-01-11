@@ -1,6 +1,6 @@
 import 'package:apptest/widgets/button_rep%C3%B3nive.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,49 +31,41 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Trang chủ'),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            const Text('Ấn Button để vào khách sạn'),
-            ReponsiveButton(
-              width: 100,
-              onPressed: () {
-                Get.toNamed('/hotel');
-              },
-            ),
-            ReponsiveButton(
-              width: 100,
-              onPressed: () {
-                Get.toNamed('/detail');
-              },
-            ),
-            TableCalendar(
-              calendarFormat: _calendarFormat,
-              headerVisible: false,
-              focusedDay: _focusedDay,
-              firstDay: DateTime.utc(2024, 1, 1),
-              lastDay: DateTime.utc(2024, 12, 31),
-              rangeStartDay: _rangeStart,
-              rangeEndDay: _rangeEnd,
-              calendarStyle: const CalendarStyle(
-                outsideDaysVisible: false,
+      body: Center(
+        child: Container(
+          child: Column(
+            children: [
+              const Text('Ấn Button để vào screen khách sạn'),
+              ReponsiveButton(
+                width: 100,
+                onPressed: () {
+                  Get.toNamed('/hotel');
+                },
               ),
-              rangeSelectionMode: RangeSelectionMode.toggledOn,
-              onRangeSelected: _onRangeSelected,
-              onFormatChanged: (format) {
-                if (_calendarFormat != format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                }
-              },
-              onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
-              },
-              rowHeight: 50,
-            ),
-          
-          ],
+              SizedBox(
+                height: 10,
+              ),
+              const Text('Ấn Button để vào test rest api screen'),
+              ReponsiveButton(
+                width: 100,
+                onPressed: () {
+                  Get.toNamed('/detail');
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ReponsiveButton(
+                width: 100,
+                onPressed: () {
+                  Get.toNamed('/scroll');
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class TodoController extends GetxController {
   var TodoList = RxList<TodoModel>();
-  var isLoading = true.obs; // Thêm biến để theo dõi trạng thái loading
+  var isLoading = true.obs;
 
   @override
   void onInit() {
@@ -20,21 +20,21 @@ class TodoController extends GetxController {
       var data = jsonDecode(response.body.toString());
 
       if (response.statusCode == 200) {
-        TodoList.clear(); // Clear existing data before adding new data
+        TodoList.clear();
         for (Map<String, dynamic> index in data) {
           TodoList.add(TodoModel.fromJson(index));
         }
       }
     } catch (error) {
-      // Xử lý lỗi nếu có
       print('Error: $error');
     } finally {
-      isLoading.value = false; // Tắt loading sau khi hoàn thành request
+      isLoading(false);
     }
   }
 
   Future<void> addTodo(TodoModel newTodo) async {
     try {
+      isLoading(true);
       final response = await http.post(
         Uri.parse('https://659cb628633f9aee7907d8d7.mockapi.io/api/TodoList'),
         body: jsonEncode(newTodo.toJson()),
@@ -42,16 +42,18 @@ class TodoController extends GetxController {
       );
 
       if (response.statusCode == 201) {
-        // If the todo was added successfully, refresh the todo list
         getTodos();
       }
     } catch (error) {
       print('Error adding todo: $error');
+    } finally {
+      isLoading(false);
     }
   }
 
   Future<void> updateTodo(TodoModel updatedTodo) async {
     try {
+      isLoading(true);
       final response = await http.put(
         Uri.parse(
             'https://659cb628633f9aee7907d8d7.mockapi.io/api/TodoList/${updatedTodo.id}'),
@@ -65,11 +67,14 @@ class TodoController extends GetxController {
       }
     } catch (error) {
       print('Error updating todo: $error');
+    } finally {
+      isLoading(false);
     }
   }
 
   Future<void> deleteTodo(TodoModel todo) async {
     try {
+      isLoading(true);
       final response = await http.delete(
         Uri.parse(
             'https://659cb628633f9aee7907d8d7.mockapi.io/api/TodoList/${todo.id}'),
@@ -81,6 +86,8 @@ class TodoController extends GetxController {
       }
     } catch (error) {
       print('Error deleting todo: $error');
+    } finally {
+      isLoading(false);
     }
   }
 }

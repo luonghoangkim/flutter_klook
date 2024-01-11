@@ -42,8 +42,9 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   sliding_up_panel: ^2.0.0+1
   card_swiper: ^3.0.0
-  anchor_tabs: ^0.0.3
   shimmer: ^3.0.0
+  flutter_slidable: ^3.0.1
+  anchor_tabs: ^0.0.9
 
 dev_dependencies:
   flutter_test:

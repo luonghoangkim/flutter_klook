@@ -1,27 +1,30 @@
-import 'package:apptest/theme/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:apptest/theme/app_color.dart';
 
 class IconButtonWidget extends StatelessWidget {
   final IconData iconData;
   final Color iconColor;
   final VoidCallback onPressed;
   final double scrollPositionThreshold;
-  final double scrollPosition;  
+  final double scrollPosition;
 
   IconButtonWidget({
     required this.iconData,
     required this.iconColor,
     required this.onPressed,
     this.scrollPositionThreshold = 101.0,
-    required this.scrollPosition,  
+    required this.scrollPosition,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
       width: 50,
       height: 50,
-      margin: const EdgeInsets.only(right: 10),
+      margin: EdgeInsets.only(
+        right: scrollPosition < scrollPositionThreshold ? 10 : 0,
+      ),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: scrollPosition < scrollPositionThreshold
@@ -29,7 +32,12 @@ class IconButtonWidget extends StatelessWidget {
             : Colors.transparent,
       ),
       child: IconButton(
-        icon: Icon(iconData, color: scrollPosition < scrollPositionThreshold ? Colors.white : iconColor),
+        icon: Icon(
+          iconData,
+          color: scrollPosition < scrollPositionThreshold
+              ? Colors.white
+              : iconColor,
+        ),
         onPressed: onPressed,
       ),
     );

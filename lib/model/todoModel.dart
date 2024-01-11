@@ -23,7 +23,7 @@ class TodoModel {
     return TodoModel(
       title: title ?? this.title,
       name: name ?? this.name,
-      id: this.id,
+      id: id,
     );
   }
 }

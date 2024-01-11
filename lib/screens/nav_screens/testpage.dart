@@ -1,5 +1,6 @@
 import 'package:apptest/controller/totoListController.dart';
 import 'package:apptest/model/todoModel.dart';
+import 'package:apptest/theme/app_color.dart';
 import 'package:apptest/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,36 +27,70 @@ class DetailScreen extends StatelessWidget {
             children: [
               TextField(
                 controller: titleController,
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(
+                  labelText: 'Title',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  labelStyle: TextStyle(color: AppColors.primaryColor),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.primaryColor),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               TextField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  labelStyle: TextStyle(color: AppColors.primaryColor),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: AppColors.primaryColor),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                ),
               ),
             ],
           ),
           actions: [
-            CustomButton(
-                buttonText: 'Thoát',
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-            CustomButton(
-                buttonText: todo == null ? 'Thêm' : 'Cập nhật',
-                onPressed: () {
-                  if (todo == null) {
-                    todoController.addTodo(TodoModel(
-                      title: titleController.text,
-                      name: nameController.text,
-                    ));
-                  } else {
-                    todoController.updateTodo(todo.copyWith(
-                      title: titleController.text,
-                      name: nameController.text,
-                    ));
-                  }
-                  Navigator.of(context).pop();
-                }),
+            Row(
+              children: [
+                Expanded(
+                  child: CustomButton(
+                      buttonText: 'Thoát',
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
+                ),
+                SizedBox(width: 5),
+                Expanded(
+                  child: CustomButton(
+                      buttonText: todo == null ? 'Thêm' : 'Cập nhật',
+                      onPressed: () {
+                        if (todo == null) {
+                          todoController.addTodo(TodoModel(
+                            title: titleController.text,
+                            name: nameController.text,
+                          ));
+                        } else {
+                          todoController.updateTodo(todo.copyWith(
+                            title: titleController.text,
+                            name: nameController.text,
+                          ));
+                        }
+                        Navigator.of(context).pop();
+                      }),
+                ),
+              ],
+            ),
           ],
         );
       },
@@ -91,9 +126,12 @@ class DetailScreen extends StatelessWidget {
                     itemCount: todoController.TodoList.length,
                     itemBuilder: (context, index) {
                       var todo = todoController.TodoList[index];
+                      // print(todo.toJson());
                       return Container(
                         margin: const EdgeInsets.all(10),
-                        color: Colors.grey[400],
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(16)),
                         child: ListTile(
                           title: Text(todo.title.toString()),
                           subtitle: Text(todo.name.toString()),

@@ -28,84 +28,84 @@ class _ListHotelCardState extends State<ListHotelCard> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          color: AppColors.whiteColor,
-          padding: const EdgeInsets.symmetric(vertical: 13),
-          child: Row(
-            children: [
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(widget.imagePath),
-                    fit: BoxFit.cover,
+        InkWell(
+          onTap: () {
+            setState(() {
+              isExpanded = !isExpanded;
+            });
+          },
+          child: Container(
+            color: AppColors.whiteColor,
+            padding: const EdgeInsets.symmetric(vertical: 13),
+            child: Row(
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(widget.imagePath),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  borderRadius: BorderRadius.circular(10),
                 ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.title,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.zoom_out_map, size: 12),
-                        const SizedBox(width: 5),
-                        Text(
-                          widget.subTitle,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppColors.textTitleColor,
-                          ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.title,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
-                    isExpanded
-                        ? const Text('')
-                        : Row(
-                            children: [
-                              const Text(
-                                'Từ ',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: AppColors.textTitleColor,
-                                ),
-                              ),
-                              Flexible(
-                                child: Text(
-                                  widget.price,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.zoom_out_map, size: 12),
+                          const SizedBox(width: 5),
+                          Text(
+                            widget.subTitle,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: AppColors.textTitleColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      isExpanded
+                          ? const Text('')
+                          : Row(
+                              children: [
+                                const Text(
+                                  'Từ ',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.textTitleColor,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                  ],
+                                Flexible(
+                                  child: Text(
+                                    widget.price,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ],
+                  ),
                 ),
-              ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    isExpanded = !isExpanded;
-                  });
-                },
-                child: Container(
+                Container(
                   width: 20,
                   height: 20,
                   decoration: BoxDecoration(
@@ -121,8 +121,8 @@ class _ListHotelCardState extends State<ListHotelCard> {
                     color: AppColors.primaryColor,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         if (isExpanded)
