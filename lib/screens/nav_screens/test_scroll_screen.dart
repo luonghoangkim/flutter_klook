@@ -117,7 +117,7 @@ class SimpleExample extends StatelessWidget {
                   Text('Mô tả'),
                   ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.all(8),
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {

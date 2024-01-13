@@ -1,4 +1,5 @@
-import 'package:anchor_tabs/anchor_tabs.dart';
+import 'dart:math';
+
 import 'package:apptest/theme/app_color.dart';
 import 'package:apptest/widgets/achor_tab_panel_custom.dart';
 import 'package:apptest/widgets/custom_button.dart';
@@ -383,113 +384,130 @@ class _DetailHotelScreenState extends State<DetailHotelScreen> {
                     thickness: 10,
                     color: AppColors.listTitleColor,
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        const Flexible(
+                          flex: 3,
+                          child: Column(children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Thứ 4',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.textTitleColor)),
+                                Text('Thứ 5',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.textTitleColor)),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('17/1',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                Text('-1 đêm-',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.textTitleColor)),
+                                Text('18/1',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ],
+                            )
+                          ]),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                height: 30,
+                                width: 1,
+                                color: AppColors.textTitleColor,
+                              ),
+                              const Icon(Icons.meeting_room,
+                                  color: AppColors.textTitleColor, size: 16),
+                              const Text('1',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              const Icon(Icons.person,
+                                  color: AppColors.textTitleColor, size: 16),
+                              const Text('2',
+                                  style: TextStyle(
+                                      fontSize: 15, fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SliverPersistentHeader(
+                floating: false,
+                pinned: _scrollPosition < 930 ? true : false,
+                delegate: _SliverAppBarDelegate(
+                    minHeight: 50,
+                    maxHeight: 50,
+                    child: Container(
+                      color: AppColors.whiteColor,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Divider(
+                            thickness: 0.5,
+                            color: AppColors.listTitleColor,
+                          ),
+                          Wrap(
+                            children: [
+                              CustomBarWidget(
+                                iconData: Icons.local_fire_department,
+                                text: 'Giá tốt',
+                                iconColor: AppColors.primaryColor,
+                                textColor: AppColors.textTitleColor,
+                                backgroundColor: AppColors.listTitleColor,
+                                fontSize: 14,
+                                onTap: () {},
+                              ),
+                              CustomBarWidget(
+                                text: 'Bữa sáng miễn phí',
+                                textColor: AppColors.textTitleColor,
+                                backgroundColor: AppColors.listTitleColor,
+                                fontSize: 14,
+                                onTap: () {},
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ))),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
                   Container(
                     padding: const EdgeInsets.all(14),
                     width: double.maxFinite,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            const Flexible(
-                              flex: 3,
-                              child: Column(children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Thứ 4',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: AppColors.textTitleColor)),
-                                    Text('Thứ 5',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: AppColors.textTitleColor)),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('17/1',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    Text('-1 đêm-',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: AppColors.textTitleColor)),
-                                    Text('18/1',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                  ],
-                                )
-                              ]),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    margin:
-                                        const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                    height: 30,
-                                    width: 1,
-                                    color: AppColors.textTitleColor,
-                                  ),
-                                  const Icon(Icons.meeting_room,
-                                      color: AppColors.textTitleColor,
-                                      size: 16),
-                                  const Text('1',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      )),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  const Icon(Icons.person,
-                                      color: AppColors.textTitleColor,
-                                      size: 16),
-                                  const Text('2',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Divider(
-                          thickness: 0.5,
-                          color: AppColors.listTitleColor,
-                        ),
-                        Wrap(
-                          children: [
-                            CustomBarWidget(
-                              iconData: Icons.local_fire_department,
-                              text: 'Giá tốt',
-                              iconColor: AppColors.primaryColor,
-                              textColor: AppColors.textTitleColor,
-                              backgroundColor: AppColors.listTitleColor,
-                              fontSize: 14,
-                              onTap: () {},
-                            ),
-                            CustomBarWidget(
-                              text: 'Bữa sáng miễn phí',
-                              textColor: AppColors.textTitleColor,
-                              backgroundColor: AppColors.listTitleColor,
-                              fontSize: 14,
-                              onTap: () {},
-                            ),
-                          ],
-                        ),
                         const Divider(
                           thickness: 0.5,
                           color: AppColors.listTitleColor,
@@ -1574,3 +1592,33 @@ final List<Map<String, dynamic>> policyFull = [
     ],
   },
 ];
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  @override
+  double get minExtent => minHeight;
+  @override
+  double get maxExtent => max(maxHeight, minHeight);
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
+  }
+}
