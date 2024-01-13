@@ -35,11 +35,31 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           child: Column(
             children: [
-              const Text('Ấn Button để vào screen khách sạn'),
+              const Text('Ấn Button để vào screen của Lương'),
               ReponsiveButton(
                 width: 100,
                 onPressed: () {
                   Get.toNamed('/hotel');
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              const Text('Ấn Button để vào screen của Bình'),
+              ReponsiveButton(
+                width: 100,
+                onPressed: () {
+                  Get.toNamed('/Binh');
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              const Text('Ấn Button để vào screen của Hiếu bug'),
+              ReponsiveButton(
+                width: 100,
+                onPressed: () {
+                  Get.toNamed('/scroll');
                 },
               ),
               SizedBox(
@@ -50,21 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 100,
                 onPressed: () {
                   Get.toNamed('/detail');
-                },
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ReponsiveButton(
-                width: 100,
-                onPressed: () {
-                  Get.toNamed('/scroll');
-                },
-              ),
-              ReponsiveButton(
-                width: 100,
-                onPressed: () {
-                  Get.toNamed('/Binh');
                 },
               ),
               SizedBox(
