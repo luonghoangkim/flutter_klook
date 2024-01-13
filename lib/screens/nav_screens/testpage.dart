@@ -22,43 +22,51 @@ class DetailScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           title: Text(todo == null ? 'Add Todo' : 'Update Todo'),
-          content: Column(
-            children: [
-              TextField(
-                controller: titleController,
-                decoration: const InputDecoration(
-                  labelText: 'Title',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  labelStyle: TextStyle(color: AppColors.primaryColor),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.primaryColor),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  cursorColor: AppColors.primaryColor,
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Title',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: AppColors.primaryColor),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primaryColor),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Name',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  labelStyle: TextStyle(color: AppColors.primaryColor),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.primaryColor),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-            ],
+                TextField(
+                  cursorColor: AppColors.primaryColor,
+                  // autofocus: true,
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Name',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: AppColors.primaryColor),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.primaryColor),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                  ),
+                ),
+              ],
+            ),
           ),
           actions: [
             Row(
