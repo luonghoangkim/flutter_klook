@@ -96,6 +96,14 @@ class _SearchHotelScreenState extends State<SearchHotelScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: Container(
+              margin: const EdgeInsets.only(left: 5),
+              child: Icon(Icons.navigate_before)),
+        ),
         title: Column(
           children: [
             Container(
@@ -262,9 +270,8 @@ class _SearchHotelScreenState extends State<SearchHotelScreen> {
                                       child: SizedBox(
                                         height: 200,
                                         width: double.infinity,
-                                        child: Obx( 
-                                            () => ImageSlider(
-                                                imageUrls: images.value)),
+                                        child: Obx(() => ImageSlider(
+                                            imageUrls: images.value)),
                                       ),
                                     ),
                                     Padding(

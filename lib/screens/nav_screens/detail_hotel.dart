@@ -451,7 +451,8 @@ class _DetailHotelScreenState extends State<DetailHotelScreen> {
                                   color: AppColors.textTitleColor, size: 16),
                               const Text('2',
                                   style: TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold)),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),
@@ -564,6 +565,7 @@ class _DetailHotelScreenState extends State<DetailHotelScreen> {
                         ),
                         const CustomTitleRow(title: 'Đánh giá'),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [

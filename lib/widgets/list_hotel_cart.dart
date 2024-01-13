@@ -145,12 +145,14 @@ class _ListHotelCardState extends State<ListHotelCard> {
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  '${roomDetail['bedType']}',
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                                Flexible(
+                                  child: Text(
+                                    '${roomDetail['bedType']}',
+                                    style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 5,

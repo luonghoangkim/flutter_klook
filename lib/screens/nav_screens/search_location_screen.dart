@@ -194,14 +194,4 @@ class _FakeAPI {
     {'id': '9', 'name': 'Paris', 'country': 'France'},
     {'id': '10', 'name': 'London', 'country': 'United Kingdom'},
   ];
-
-  // static Future<Iterable<Map<String, String>>> search(String query) async {
-  //   await Future<void>.delayed(fakeAPIDuration);
-  //   if (query == '') {
-  //     return const Iterable<Map<String, String>>.empty();
-  //   }
-  //   return _kOptions.where((option) {
-  //     return option['name']!.toLowerCase().contains(query.toLowerCase());
-  //   });
-  // }
 }

@@ -162,6 +162,8 @@ class DetailScreen extends StatelessWidget {
 }
 
 class ShimmerLoadingList extends StatelessWidget {
+  const ShimmerLoadingList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
