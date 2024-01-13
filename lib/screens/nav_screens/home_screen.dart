@@ -61,6 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   Get.toNamed('/scroll');
                 },
               ),
+              ReponsiveButton(
+                width: 100,
+                onPressed: () {
+                  Get.toNamed('/Binh');
+                },
+              ),
               SizedBox(
                 height: 10,
               ),
