@@ -53,6 +53,12 @@ class _DetailScreenState extends State<DetailBinhScreen>
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     displayedItems = DataDetail.ServiceData().take(visibleItemCount).toList();
@@ -61,37 +67,14 @@ class _DetailScreenState extends State<DetailBinhScreen>
       setState(() {
         _scrollPosition = _scrollController.offset;
       });
-
-      // if (_ServiceKey.currentContext != null) {
-      //   // RenderBox box =
-      //   //     _ServiceKey.currentContext!.findRenderObject() as RenderBox;
-      //   // Offset Service = box.localToGlobal(Offset.zero);
-
-      //   // RenderBox ReviewBox =
-      //   //     _ReviewKey.currentContext!.findRenderObject() as RenderBox;
-      //   // Offset Review = box.localToGlobal(Offset.zero);
-
-      //   RenderBox reviewBox =
-      //       _ReviewKey.currentContext!.findRenderObject() as RenderBox;
-
-      //   Offset reviewPosition = reviewBox.localToGlobal(Offset.zero);
-      //   print('Vị trí của reviewBox: ${reviewBox}');
-      //   print('Vị trí của reviewPosition: ${reviewPosition}');
-      //   if (reviewPosition.dy<180) {
-      //     print(
-      //         'Vị trí của Controller: ${_scrollController.offset} > ${reviewPosition.dy}');
-
-      //     tabController.animateTo(1,
-      //         duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
-      //   }
-      // }
     });
   }
 
   @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
   }
 //   bool isWidgetVisible(GlobalKey key) {
 //   final RenderObject? renderObject = key.currentContext?.findRenderObject();

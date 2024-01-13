@@ -1,27 +1,17 @@
 import 'package:apptest/model/home_model.dart';
-import 'package:apptest/screens/nav_screens/search_location_page.dart';
-import 'package:apptest/widgets/carousel_Card.dart';
+import 'package:apptest/screens/nav_screens/search_location_page.dart'; 
 import 'package:apptest/widgets/custom_utill.dart';
-import 'package:apptest/widgets/explore_Card.dart';
-import 'package:apptest/widgets/horizontal_ListWidget.dart';
-import 'package:apptest/widgets/button_rep%C3%B3nive.dart';
+import 'package:apptest/widgets/explore_Card.dart'; 
 import 'package:apptest/widgets/custon_searchBox.dart';
 import 'package:apptest/widgets/image_slider2.dart';
 import 'package:apptest/widgets/recent_card.dart';
-import 'package:apptest/widgets/sale_Card%20.dart';
-import 'package:apptest/widgets/search.dart';
+import 'package:apptest/widgets/sale_Card%20.dart'; 
 import 'package:apptest/widgets/tour_Card.dart';
 import 'package:apptest/widgets/travel_Card.dart';
-import 'package:flutter/material.dart';
-import 'package:apptest/model/hotel_model.dart';
-import 'package:apptest/widgets/app_color.dart';
-import 'package:apptest/widgets/custon_card_listtile.dart';
-import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart'; 
+import 'package:apptest/widgets/app_color.dart'; 
 import 'dart:math';
-import 'package:get/get.dart';
-import 'package:flutter_sticky_widgets/flutter_sticky_widgets.dart';
+import 'package:get/get.dart'; 
 
 class HomePageNew extends StatefulWidget {
   const HomePageNew({Key? key}) : super(key: key);
@@ -111,16 +101,14 @@ class _HomePageState extends State<HomePageNew>
   Widget build(BuildContext context) {
     final List<Map<String, String>> dataUtili = DataHome.utililData();
     final List<Map<String, String>> dataRecent = DataHome.recentData();
-    final List<Map<String, String>> dataWhyKlook = DataHotel.whyKlook();
-    final List<Map<String, String>> dataFAQs = DataHotel.bookingFAQs();
     final List<Map<String, String>> dataCarousel = DataHome.CarouselData();
     final List<Map<String, String>> dataTravel = DataHome.TravelData();
     final List<Map<String, String>> dataTour = DataHome.TourData();
 
-    final List<Map<String, String>> dataSearch = DataHome.SearchData();
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: CustomScrollView(
+        physics: const ClampingScrollPhysics(),
         controller: _scrollController,
         slivers: [
           SliverAppBar(
