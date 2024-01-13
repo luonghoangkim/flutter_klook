@@ -1,5 +1,7 @@
 // router_app.dart
+import 'package:apptest/screens/nav_screens/NavigationBootom_Menu.dart';
 import 'package:apptest/screens/nav_screens/detail_hotel.dart';
+import 'package:apptest/screens/nav_screens/detail_screen.dart';
 import 'package:apptest/screens/nav_screens/search_hotel_screen.dart';
 import 'package:apptest/screens/nav_screens/test_scroll_screen.dart';
 import 'package:apptest/screens/nav_screens/testpage.dart';
@@ -15,5 +17,7 @@ class AppRouter {
     GetPage(name: '/detail', page: () => DetailScreen()),
     GetPage(name: '/detail_hotel', page: () => DetailHotelScreen()),
     GetPage(name: '/scroll', page: () => ScrollToTopButton()),
+    GetPage(name: '/Binh', page: () => BottomNavigationBarMenu()),
+    GetPage(name: '/detailScreen', page: () => DetailBinhScreen()),
   ];
 }

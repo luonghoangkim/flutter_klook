@@ -45,6 +45,8 @@ dependencies:
   shimmer: ^3.0.0
   flutter_slidable: ^3.0.1
   anchor_tabs: ^0.0.9
+  flutter_sticky_widgets: ^0.0.3
+  visibility_detector: 0.4.0+2
 
 dev_dependencies:
   flutter_test:
